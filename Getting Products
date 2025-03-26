@@ -1,0 +1,71 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+import csv
+
+def __main__():
+    # Get all product links from the Costco database
+    products = recursive_get("https://costcofdb.com/food-database", "https://costcofdb.com/product-category")
+    print(f"Found {len(products)} products. Fetching details...")
+
+    # Extract product details and save to CSV
+    product_data = []
+    for product_url in products:
+        try:
+            product_details = extract_product_data(product_url)
+            if product_details:
+                product_data.append(product_details)
+        except Exception as e:
+            print(f"Failed to fetch data from {product_url}: {e}")
+
+    save_to_csv(product_data)
+    print("Data saved to products.csv")
+
+def find_links(origin: str, target: str, final: bool = False):
+    # Extract target links from base link
+    r = requests.get(origin)
+    regexed_target = target.replace("/", "\/").replace(".", "\.")
+    soup = BeautifulSoup(r.content, "html.parser")
+    soup = soup.prettify()
+
+    if final:
+        links = re.findall(r'href="(https://costcofdb\.com/product/[^/"]+?)"', soup)
+    else:
+        links = re.findall(f'aria-label="[^/"]+?" href="({regexed_target}/[^/"]+?)"', soup)
+
+    return list(set(links))  # Remove duplicates using set()
+
+def recursive_get(origin: str, target: str):
+    links = find_links(origin, target)
+    if not links:
+        return find_links(origin, origin, final=True)
+    else:
+        products = []
+        for link in links:
+            print(f"Fetching category: {link}")
+            products.extend(recursive_get(link, link))
+        return products
+
+def extract_product_data(url: str):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, "html.parser")
+    
+    # Extract product name
+    name = soup.find("h1", class_="product-title")
+    name = name.text.strip() if name else "Unknown Product"
+    
+    # Extract product price
+    price = soup.find(string=re.compile(r'\$\d+(\.\d{2})?'))
+    price = price.strip() if price else "Price Not Available"
+    
+    print(f"Scraped: {name} - {price}")
+    return {"name": name, "price": price, "url": url}
+
+def save_to_csv(data):
+    with open("products.csv", "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=["name", "price", "url"])
+        writer.writeheader()
+        writer.writerows(data)
+
+if __name__ == "__main__":
+    __main__()
