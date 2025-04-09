@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grocery Price Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Find the Cheapest Groceries Near You 🛒</h1>
+
+    <button id="getLocationBtn">📍 Use My Location</button>
+    <p id="locationDisplay"></p>
+
+    <form id="groceryForm">
+      <label for="groceryList">Enter your grocery list (comma-separated):</label>
+      <textarea id="groceryList" rows="4" placeholder="e.g., milk, eggs, bread, bananas"></textarea>
+      <button type="submit">Compare Prices</button>
+    </form>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
