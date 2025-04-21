@@ -172,4 +172,3 @@ document.getElementById("checkPrices").addEventListener("click", () => {
   // Show the table
   table.style.display = "table";
 });
-  
