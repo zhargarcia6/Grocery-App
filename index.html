@@ -2,26 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grocery Price Finder</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grocery Price Optimizer</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Find the Cheapest Groceries Near You 🛒</h1>
+    <h2>Grocery Price Optimizer</h2>
 
-    <button id="getLocationBtn">📍 Use My Location</button>
-    <p id="locationDisplay"></p>
+    <div id="locationDisplay">📍 Getting your location...</div>
 
-    <form id="groceryForm">
-      <label for="groceryList">Enter your grocery list (comma-separated):</label>
-      <textarea id="groceryList" rows="4" placeholder="e.g., milk, eggs, bread, bananas"></textarea>
-      <button type="submit">Compare Prices</button>
-    </form>
+    <label for="groceryList">Enter your grocery list (comma-separated):</label>
+    <textarea id="groceryList" placeholder="e.g., milk, eggs, bread, bananas"></textarea>
+
+    <button id="checkPrices">Find Best Prices Nearby</button>
 
     <div id="results"></div>
+
+    <div class="note">
+      Prices shown are estimated based on current listings. Store availability may vary.
+    </div>
+
+    <table class="price-table" id="resultsTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Store</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody">
+        <!-- JavaScript will inject rows here -->
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="2">Total</td>
+          <td id="totalPrice">$0.00</td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
