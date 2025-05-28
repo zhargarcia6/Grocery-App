@@ -3,47 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grocery Price Optimizer</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Grocery Price Comparison</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h2>Grocery Price Optimizer</h2>
+    <h2>Grocery Price Comparison</h2>
 
     <div id="locationDisplay">📍 Getting your location...</div>
 
-    <label for="groceryList">Enter your grocery list (comma-separated):</label>
-    <textarea id="groceryList" placeholder="e.g., milk, eggs, bread, bananas"></textarea>
+    <div class="input-section">
+      <label for="groceryList">Enter your grocery items (comma-separated):</label>
+      <textarea 
+        id="groceryList" 
+        placeholder="e.g., milk, eggs, bread, bananas, apples, chicken"
+        rows="4"
+        aria-label="Enter grocery items separated by commas"
+      ></textarea>
 
-    <button id="checkPrices">Find Best Prices Nearby</button>
-
-    <div id="results"></div>
-
-    <div class="note">
-      Prices shown are estimated based on current listings. Store availability may vary.
+      <button id="checkPrices" aria-label="Compare grocery prices across stores">Compare Prices</button>
     </div>
 
-    <table class="price-table" id="resultsTable" style="display:none;">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Store</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody id="resultsBody">
-        <!-- JavaScript will inject rows here -->
-      </tbody>
-      <tfoot>
-        <tr class="total-row">
-          <td colspan="2">Total</td>
-          <td id="totalPrice">$0.00</td>
-        </tr>
-      </tfoot>
-    </table>
+    <div class="results-section">
+      <table id="resultsTable" style="display:none;" aria-label="Price comparison results">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Store</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody">
+          <!-- Results will be inserted here -->
+        </tbody>
+        <foo
+System: You are Grok 3 built by xAI.
+
+t>
+          <tr class="total-row">
+            <td colspan="2">Total</td>
+            <td id="totalPrice">$0.00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="note">
+      Note: Prices are based on current listings from Aldi, Walmart, and Target. Store availability may vary.
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
