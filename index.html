@@ -12,6 +12,22 @@
 
     <div id="locationDisplay">📍 Getting your location...</div>
 
+    <!-- Toggle and Radius Selector -->
+    <div class="location-controls">
+      <label>
+        <input type="checkbox" id="locationToggle" checked />
+        🔍 Filter by nearby stores
+      </label>
+
+      <label for="radiusSelector">Radius:</label>
+      <select id="radiusSelector">
+        <option value="10">10 mi</option>
+        <option value="20">20 mi</option>
+        <option value="30" selected>30 mi</option>
+        <option value="50">50 mi</option>
+      </select>
+    </div>
+
     <div class="input-section">
       <label for="groceryList">Enter your grocery items (comma-separated):</label>
       <textarea 
@@ -34,12 +50,9 @@
           </tr>
         </thead>
         <tbody id="resultsBody">
-          <!-- Results will be inserted here -->
+          <!-- Results inserted here -->
         </tbody>
-        <foo
-System: You are Grok 3 built by xAI.
-
-t>
+        <tfoot>
           <tr class="total-row">
             <td colspan="2">Total</td>
             <td id="totalPrice">$0.00</td>
